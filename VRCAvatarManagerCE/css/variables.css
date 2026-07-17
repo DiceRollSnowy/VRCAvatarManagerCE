@@ -15,8 +15,11 @@
     --color-text:#eeeeee;
     --color-text-sub:#cccccc;
 
-    --color-card-bg:#3b3b3b;
-    --color-card-thumb-bg:#666666;
+    --color-dialog-bg:#2d2d2d;
+    --color-thumb-bg:#2d2d2d;
+
+    --color-grid-bg:#3b3b3b;
+    --color-grid-thumb-bg:#666666;
     
     --color-input-bg:#2d2d30;
 
@@ -27,8 +30,8 @@
     --shadow:
         0 2px 8px rgba(0,0,0,.25);
 
-    /* Card */
-    --card-width: 220px;
+    /* Grid */
+    --grid-width: 220px;
     --thumb-height: 150px;
 
     /* Space */
@@ -53,6 +56,7 @@ select
 button
 {
     border: none;
+    text-align:center;
 }
 
 button {

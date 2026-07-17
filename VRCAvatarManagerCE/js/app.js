@@ -1,38 +1,49 @@
 const data = [...Array(20)].map((_,i)=>({name:'Avatar '+(i+1)}));
 
-const grid = document.getElementById('grid');
-const modal = document.getElementById('modal');
+const avatarGrid = document.getElementById('avatarGrid');
+const avatarModal = document.getElementById('avatarDetailModal');
 
-const sizeSmall = document.getElementById('sizeSmall');
-const sizeMedium = document.getElementById('sizeMedium');
-const sizeLarge = document.getElementById('sizeLarge');
+const sizeSmallBtn = document.getElementById('sizeSmallBtn');
+const sizeMediumBtn = document.getElementById('sizeMediumBtn');
+const sizeLargeBtn = document.getElementById('sizeLargeBtn');
 const sizeButtons = [
-    sizeSmall,
-    sizeMedium,
-    sizeLarge
+    sizeSmallBtn,
+    sizeMediumBtn,
+    sizeLargeBtn
 ];
 
 /* Fuction */
 
 function render(list)
 {
-    grid.innerHTML='';
+    avatarGrid.innerHTML='';
     list.forEach(a=>{
         const card = document.createElement('div');
-        card.className='card';
+        card.className='grid';
         card.innerHTML=
-            `<div class='card-thumb'></div>
-            <p class='avatar-name'>${a.name}</p>
-            <button id='detailBtn' class='detail'>詳細</button>
-            <button id='changeBtn' class='change'>変更</button>`;
-        grid.appendChild(card);
+            `<div class='grid-thumb'></div>
+            <p class='grid-avatarname'>${a.name}</p>
+            <button id='detailBtn' class='grid-detail'>詳細</button>
+            <button id='changeBtn' class='grid-change'>変更</button>`;
+
+        const detailBtn = card.querySelector('#detailBtn');
+        detailBtn.onclick=()=>{
+            //t.textContent=a.name;
+            avatarModal.showModal();
+        };
+        const changeBtn = card.querySelector('#changeBtn');
+        changeBtn.onclick=()=>{
+            alert(a.name + "に 変更しますか？");
+        }
+
+        avatarGrid.appendChild(card);
     });
 }
 
 function changeCardSize(width, thumbHeight)
 {
     document.documentElement.style.setProperty(
-        "--card-width",
+        "--grid-width",
         width
     );
 
@@ -50,25 +61,33 @@ function setActive(button)
 
 /* ChangeCardSize */
 
-sizeSmall.addEventListener('click', () => changeCardSize('140px', '90px')); // 120
-sizeMedium.addEventListener('click', () => changeCardSize('220px', '150px')); // 200
-sizeLarge.addEventListener('click', () => changeCardSize('340px', '240px')); // 320
+sizeSmallBtn.addEventListener('click', () => changeCardSize('140px', '90px')); // 120
+sizeMediumBtn.addEventListener('click', () => changeCardSize('220px', '150px')); // 200
+sizeLargeBtn.addEventListener('click', () => changeCardSize('340px', '240px')); // 320
 
-sizeSmall.onclick = () =>
+sizeSmallBtn.onclick = () =>
 {
     changeCardSize("140px", "90px");
-    setActive(sizeSmall);
+    setActive(sizeSmallBtn);
 };
-sizeMedium.onclick = () =>
+sizeMediumBtn.onclick = () =>
 {
     changeCardSize("220px", "150px");
-    setActive(sizeMedium);
+    setActive(sizeMediumBtn);
 };
-sizeLarge.onclick = () =>
+sizeLargeBtn.onclick = () =>
 {
     changeCardSize("340px", "240px");
-    setActive(sizeLarge);
+    setActive(sizeLargeBtn);
 };
+
+/* Modal */
+
+changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
+copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
+openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
+deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
+closeAvatarDetailBtn.onclick=()=>avatarModal.close();
 
 /* Call Function */
 
@@ -76,4 +95,4 @@ sizeLarge.onclick = () =>
 render(data);
 
 // Init 
-setActive(sizeMedium);
+setActive(sizeMediumBtn);

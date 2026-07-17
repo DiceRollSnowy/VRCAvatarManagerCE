@@ -68,32 +68,100 @@ input.sort {
 
 /* Grid */
 
-#grid {
+#avatarGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-width), 1fr));
     gap: 16px;
     padding: 16px
 }
 
-.card {
-    background: var(--color-card-bg);
+.grid {
+    background: var(--color-grid-bg);
     border-radius: 10px;
     padding: 10px
 }
 
-.card-thumb
+.grid-thumb
 {
     width: calc(var(--thumb-height) * 4 / 3);
     height: var(--thumb-height);
 
-    background: var(--color-card-thumb-bg);
+    background: var(--color-grid-thumb-bg);
     border-radius: 8px;
     margin: 0 auto;
 }
 
-.avatar-name
+.grid-avatarname
 {
     font-size: 16px;
     font-weight: bold;
     margin: 10px auto;
+}
+
+/* AvatarDetail Modal */
+
+dialog {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-dialog-bg);
+    color: var(--color-text);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(2px);
+}
+
+.avatar-detail {
+    width: 420px;
+    padding-bottom: 16px;
+}
+
+.avatar-detail-title{
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+    padding: 12px;
+}
+
+.avatar-detail-thumbnail
+{
+    width: 240px;
+    height: 180px;
+    margin: 0 auto 20px;
+    background: var(--color-grid-thumb-bg);
+    border-radius: 10px;
+}
+
+.avatar-detail-content
+{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.avatar-detail-content button{
+    width:140px;
+    height:42px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.avatar-detail-footer
+{
+    display:flex;
+    justify-content:center;
+    margin-top:24px;
+}
+
+.avatar-detail-close{
+    width:100px;
+    height:36px;
+    border:none;
+    border-radius:8px;
 }
