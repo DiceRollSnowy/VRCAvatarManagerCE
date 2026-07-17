@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='css/style.css'>
+    </head>
+    <body>
+        <header>
+            <div class='top'>
+                <h2>VRChat Avatar Manager</h2>
+                <div class='status'>--/--件 / Last Sync --:--</div>
+            </div>
+            <div class='toolbar'>
+                <div class='toolbar-left'>
+                    <div class='sync-group'>
+                        <button id='sync25'>最新25件同期</button>
+                        <button id='syncAll'>全件同期</button>
+                    </div>
+                    <div class='search-group'>
+                        <input id='search' placeholder='名前で検索'>
+                        <select id='sort'>
+                            <option>A-Z</option>
+                            <option>Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='toolbar-right'>
+                    <button id="sizeSmall">小</button>
+                    <button id="sizeMedium">中</button>
+                    <button id="sizeLarge">大</button>
+                </div>
+            </div>
+        </header>
+
+        <main id='grid'></main>
+
+        <script src='js/app.js'></script>
+    </body>
+</html>
