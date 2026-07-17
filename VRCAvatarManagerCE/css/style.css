@@ -1,28 +1,36 @@
 body {
     margin: 0;
-    background: #1f1f1f;
-    color: #eee;
+    background: var(--color-bg);
+    color: var(--color-text);
     font-family: Segoe UI
 }
+
+/* Header */
 
 header {
     position: sticky;
     top: 0;
-    background: #303030;
-    padding: 10px;
-    box-shadow: 0 2px 8px #000
+    background: var(--color-header);
+    padding: 16px;
+    box-shadow: 0 2px 8px var(--shadow)
 }
 
 .top {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    padding-bottom: 16px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .status
 {
     font-size: 16px;
-    color: #ccc;
+    color: var(--color-text-sub);
 }
 
 /* Toolbar */
@@ -36,48 +44,29 @@ header {
 .toolbar-left {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 }
 
 .sync-group,
 .search-group {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
 .toolbar-right {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
-/* Buttons and Inputs */
-
-button,
-input,
-select {
-    font-size: 14px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: none
+input.search {
+    width: 200px;
 }
 
-button {
-    background: #4b6cb7;
-    color: #fff
+input.sort {
+    width: 60px;
 }
 
-button.active {
-    background: rgb(44, 100, 255);
-    color: white;
-}
-
-input {
-    min-width: 260px
-}
-
-/* Grid Styles */
+/* Grid */
 
 #grid {
     display: grid;
@@ -87,7 +76,7 @@ input {
 }
 
 .card {
-    background: #3b3b3b;
+    background: var(--color-card-bg);
     border-radius: 10px;
     padding: 10px
 }
@@ -96,7 +85,7 @@ input {
 {
     width: 160px;
     height: 120px;
-    background: #666;
+    background: var(--color-card-thumb-bg);
     border-radius: 8px;
     margin: 0 auto;
 }
