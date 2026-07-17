@@ -70,7 +70,7 @@ input.sort {
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
     gap: 16px;
     padding: 16px
 }
@@ -83,8 +83,9 @@ input.sort {
 
 .card-thumb
 {
-    width: 160px;
-    height: 120px;
+    width: calc(var(--thumb-height) * 4 / 3);
+    height: var(--thumb-height);
+
     background: var(--color-card-thumb-bg);
     border-radius: 8px;
     margin: 0 auto;

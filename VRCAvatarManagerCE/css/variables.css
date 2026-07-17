@@ -9,7 +9,7 @@
     --color-border-hover:#eeeeee;
 
     --color-primary:#4b6cb7;
-    --color-primary2:#4d8cff;
+    --color-active:#4d8cff;
     --color-danger:#d64a4a;
 
     --color-text:#eeeeee;
@@ -28,8 +28,8 @@
         0 2px 8px rgba(0,0,0,.25);
 
     /* Card */
-    --card-width:180px;
-    --thumb-height:120px;
+    --card-width: 220px;
+    --thumb-height: 150px;
 
     /* Space */
     --space-xs:4px;
@@ -61,7 +61,7 @@ button {
 }
 
 button.active {
-    background: var(--color-primary2);
+    background: var(--color-active);
     color: var(--color-primary-sub);
 }
 
