@@ -1,0 +1,11 @@
+{
+    "manifest_version": 3,
+    "name": "VRChat Avatar Manager",
+    "version": "0.0.1",
+    "action": {
+        "default_title": "VRChat Avatar Manager"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}
