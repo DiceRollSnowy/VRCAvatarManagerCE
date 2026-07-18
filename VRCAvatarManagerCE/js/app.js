@@ -1,17 +1,5 @@
 /* data */
-
-const data = [...Array(20)].map((_,i)=>({name:'Avatar '+(i+1)}));
-
-const avatar = {
-    id: "avtr_xxxxx",
-    name: "シフォン",
-    description: "シフォン012",
-    thumbnail: "aaa.jpg",
-    unity: "2022.3.22f1",
-    platform: "standalonewindows",
-    createdat: "2026-07-01 11:22:33",
-    updatedat: "2026-07-02 11:22:33",
-};
+//const data = [...Array(20)].map((_,i)=>({name:'Avatar '+(i+1)}));
 
 /* const */
 
@@ -44,22 +32,27 @@ const avatarUpdatedAt = document.getElementById("avatarUpdatedAt");
 function render(list)
 {
     avatarGrid.innerHTML='';
-    list.forEach(a=>{
+    list.forEach(avatar=>{
         const card = document.createElement('div');
         card.className='grid';
         card.innerHTML=
-            `<div class='grid-thumb'></div>
-            <p class='grid-avatarname'>${a.name}</p>
+            `<div class='grid-thumbnail'>
+                <img id='gridAvatarThumbnail' class='grid-thumbnail-img'>
+            </div>
+            <p class='grid-avatarname'>${avatar.name}</p>
             <button id='detailBtn' class='grid-detail'>詳細</button>
             <button id='changeBtn' class='grid-change'>変更</button>`;
 
+        const avatarThumbnail = card.querySelector('#gridAvatarThumbnail');
+        avatarThumbnail.src = avatar.thumbnail;
+        avatarThumbnail.alt = avatar.name;
         const detailBtn = card.querySelector('#detailBtn');
         detailBtn.onclick=()=>{
             showAvatarDetail(avatar);
         };
         const changeBtn = card.querySelector('#changeBtn');
         changeBtn.onclick=()=>{
-            alert(a.name + "に 変更しますか？");
+            alert(avatar.name + "に 変更しますか？");
         }
 
         avatarGrid.appendChild(card);
@@ -89,7 +82,8 @@ function showAvatarDetail(avatar)
 {
     avatarName.textContent = avatar.name;
     avatarDescription.textContent = avatar.description;
-    //avatarThumbnail.src = avatar.thumbnail;
+    avatarThumbnail.src = avatar.thumbnail;
+    avatarThumbnail.alt = avatar.name;
     avatarUnityVer.textContent = avatar.unity;
     avatarPlatform.textContent = avatar.platform;
     avatarCreatedAt.textContent = avatar.createdat;
@@ -130,7 +124,7 @@ closeAvatarDetailBtn.onclick=()=>avatarModal.close();
 /* Call Function */
 
 // Display Cards
-render(data);
+render(SampleAvatars);
 
 // Init 
 setActive(sizeMediumBtn);

@@ -81,14 +81,22 @@ input.sort {
     padding: 10px
 }
 
-.grid-thumb
+.grid-thumbnail
 {
-    width: calc(var(--thumb-height) * 4 / 3);
+    width:100%;
+    aspect-ratio:4 / 3;
     height: var(--thumb-height);
-
+    align-items: center;
     background: var(--color-grid-thumb-bg);
     border-radius: 8px;
     margin: 0 auto;
+}
+
+.grid-thumbnail-img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .grid-avatarname
