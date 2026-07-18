@@ -48,9 +48,10 @@ header {
 }
 
 .sync-group,
-.search-group {
+.filter-group
+.sort-group {
     display: flex;
-    gap: 6px;
+    gap: 10px;
 }
 
 .toolbar-right {

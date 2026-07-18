@@ -1,6 +1,9 @@
 /* data */
 //const data = [...Array(20)].map((_,i)=>({name:'Avatar '+(i+1)}));
 
+//const avatars = AvatarRepository.getAll();
+const avatars = SampleAvatars;
+
 /* const */
 
 const avatarGrid = document.getElementById('avatarGrid');
@@ -13,6 +16,8 @@ const sizeButtons = [
     sizeMediumBtn,
     sizeLargeBtn
 ];
+
+const filterNameBtn = document.getElementById('filterNameBtn');
 
 /* const AvatarDetail */
 
@@ -44,7 +49,7 @@ function render(list)
             <button id='changeBtn' class='grid-change'>変更</button>`;
 
         const avatarThumbnail = card.querySelector('#gridAvatarThumbnail');
-        avatarThumbnail.src = avatar.thumbnail;
+        avatarThumbnail.src = avatar.thumbnail_url;
         avatarThumbnail.alt = avatar.name;
         const detailBtn = card.querySelector('#detailBtn');
         detailBtn.onclick=()=>{
@@ -82,13 +87,22 @@ function showAvatarDetail(avatar)
 {
     avatarName.textContent = avatar.name;
     avatarDescription.textContent = avatar.description;
-    avatarThumbnail.src = avatar.thumbnail;
+    avatarThumbnail.src = avatar.thumbnail_url;
     avatarThumbnail.alt = avatar.name;
     avatarUnityVer.textContent = avatar.unity;
     avatarPlatform.textContent = avatar.platform;
-    avatarCreatedAt.textContent = avatar.createdat;
-    avatarUpdatedAt.textContent = avatar.updatedat;
+    avatarCreatedAt.textContent = avatar.created_at;
+    avatarUpdatedAt.textContent = avatar.updated_at;
     avatarModal.showModal();
+}
+
+function filterName()
+{
+    var text = filterNameText.value?.trim() ?? "";
+    if (text === "") {
+        return;
+    }
+    console.log(text);
 }
 
 /* ChangeCardSize */
@@ -113,8 +127,11 @@ sizeLargeBtn.onclick = () =>
     setActive(sizeLargeBtn);
 };
 
-/* Modal */
 
+/* Init */
+filterNameBtn.addEventListener('click', () => filterName());
+
+/* Modal */
 changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
 copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
 openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
@@ -124,7 +141,7 @@ closeAvatarDetailBtn.onclick=()=>avatarModal.close();
 /* Call Function */
 
 // Display Cards
-render(SampleAvatars);
+render(avatars);
 
 // Init 
 setActive(sizeMediumBtn);

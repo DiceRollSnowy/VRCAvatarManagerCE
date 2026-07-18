@@ -15,11 +15,15 @@
             <div class='toolbar'>
                 <div class='toolbar-left'>
                     <div class='sync-group'>
-                        <button id='sync25'>最新25件同期</button>
-                        <button id='syncAll'>全件同期</button>
+                        <button id='sync25Btn'>最新25件同期</button>
+                        <button id='syncAllBtn'>全件同期</button>
                     </div>
-                    <div class='search-group'>
-                        <input id='searchText' placeholder='名前で検索'>
+                    <div class='filter-group'>
+                        <input id='filterNameText' placeholder='名前で検索'>
+                        <button id="filterNameBtn" class="">検索</button>
+                    </div>
+                    <div class='sort-group'>
+                        <span class="">ソート</span>
                         <select id='sortBox' class='select'>
                             <option>A-Z</option>
                             <option>Z-A</option>
