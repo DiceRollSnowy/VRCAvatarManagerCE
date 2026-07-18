@@ -6,6 +6,23 @@ const avatars = SampleAvatars;
 
 /* const */
 
+const CARD_SIZE = {
+    Small: {
+        gridWidth: 140,
+        thumbHeight: 90
+    },
+    Medium: {
+        gridWidth: 220,
+        thumbHeight: 150
+    },
+    Large: {
+        gridWidth: 340,
+        thumbHeight: 240
+    }
+};
+
+/* Element */
+
 const avatarGrid = document.getElementById('avatarGrid');
 
 const sizeSmallBtn = document.getElementById('sizeSmallBtn');
@@ -19,7 +36,7 @@ const sizeButtons = [
 
 const filterNameBtn = document.getElementById('filterNameBtn');
 
-/* const AvatarDetail */
+/* Element AvatarDetail */
 
 const avatarModal = document.getElementById('avatarDetailModal');
 
@@ -32,7 +49,30 @@ const avatarPlatform = document.getElementById("avatarPlatform");
 const avatarCreatedAt = document.getElementById("avatarCreatedAt");
 const avatarUpdatedAt = document.getElementById("avatarUpdatedAt");
 
+/* Initialize */
+
+initializeEvents();
+
 /* Fuction */
+
+function initializeEvents()
+{
+    /* Init */
+    filterNameBtn.addEventListener('click', () => filterName());
+
+    /* Modal */
+    changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
+    copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
+    openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
+    deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
+    closeAvatarDetailBtn.onclick=()=>avatarModal.close();
+
+    // Display Cards
+    render(avatars);
+
+    // Init 
+    setActive(sizeMediumBtn);
+}
 
 function render(list)
 {
@@ -64,16 +104,16 @@ function render(list)
     });
 }
 
-function changeCardSize(width, thumbHeight)
+function changeCardSize(cardWidth, thumbHeight)
 {
     document.documentElement.style.setProperty(
         "--grid-width",
-        width
+        `${cardWidth}px`
     );
 
     document.documentElement.style.setProperty(
         "--thumb-height",
-        thumbHeight
+        `${thumbHeight}px`
     );
 }
 
@@ -107,41 +147,22 @@ function filterName()
 
 /* ChangeCardSize */
 
-sizeSmallBtn.addEventListener('click', () => changeCardSize('140px', '90px')); // 120
-sizeMediumBtn.addEventListener('click', () => changeCardSize('220px', '150px')); // 200
-sizeLargeBtn.addEventListener('click', () => changeCardSize('340px', '240px')); // 320
+sizeSmallBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Small.gridWidth, CARD_SIZE.Small.thumbHeight));
+sizeMediumBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Medium.gridWidth, CARD_SIZE.Medium.thumbHeight));
+sizeLargeBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Large.gridWidth, CARD_SIZE.Large.thumbHeight));
 
 sizeSmallBtn.onclick = () =>
 {
-    changeCardSize("140px", "90px");
+    changeCardSize(CARD_SIZE.Small.gridWidth, CARD_SIZE.Small.thumbHeight);
     setActive(sizeSmallBtn);
 };
 sizeMediumBtn.onclick = () =>
 {
-    changeCardSize("220px", "150px");
+    changeCardSize(CARD_SIZE.Medium.gridWidth, CARD_SIZE.Medium.thumbHeight);
     setActive(sizeMediumBtn);
 };
 sizeLargeBtn.onclick = () =>
 {
-    changeCardSize("340px", "240px");
+    changeCardSize(CARD_SIZE.Large.gridWidth, CARD_SIZE.Large.thumbHeight);
     setActive(sizeLargeBtn);
 };
-
-
-/* Init */
-filterNameBtn.addEventListener('click', () => filterName());
-
-/* Modal */
-changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
-copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
-openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
-deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
-closeAvatarDetailBtn.onclick=()=>avatarModal.close();
-
-/* Call Function */
-
-// Display Cards
-render(avatars);
-
-// Init 
-setActive(sizeMediumBtn);
