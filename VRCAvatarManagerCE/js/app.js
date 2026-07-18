@@ -1,6 +1,3 @@
-/* data */
-const avatars = AvatarRepository.getAll();
-
 /* const */
 
 const GRID_SIZE = {
@@ -18,6 +15,15 @@ const GRID_SIZE = {
     }
 };
 
+const SORT_TYPE = {
+    NAME_ASC: "nameAsc",
+    NAME_DESC: "nameDesc",
+    UPDATED_ASC: "updatedAsc",
+    UPDATED_DESC: "updatedDesc",
+    CREATED_ASC: "createdAsc",
+    CREATED_DESC: "createdDesc"
+}
+
 /* Element */
 
 const avatarGrid = document.getElementById('avatarGrid');
@@ -33,6 +39,8 @@ const sizeButtons = [
 
 const filterNameBtn = document.getElementById('filterNameBtn');
 const filterNameText = document.getElementById('filterNameText');
+
+const sortSelect = document.getElementById('sortSelect');
 
 /* Element AvatarDetail */
 
@@ -63,20 +71,30 @@ function initializeEvents()
     closeAvatarDetailBtn.onclick=()=>avatarModal.close();
 
     // Filter Event
-    filterNameBtn.addEventListener('click', () => filterAvatarName());
+    filterNameBtn.addEventListener('click', () => updateList());
     filterNameText.addEventListener("keydown", (e) =>
     {
         if (e.key === "Enter")
         {
-            filterAvatarName();
+            updateList();
         }
     });
 
+    sortSelect.addEventListener("change", () => updateList());
+
     // Display Cards
-    render(avatars);
+    updateList()
 
     // Size
     setActive(sizeMediumBtn);
+}
+
+function updateList()
+{
+    let result = AvatarRepository.getAll();
+    result = filterAvatar(result, filterNameText.value);
+    result = sortAvatars(result, sortSelect.value);
+    render(result);
 }
 
 function render(list)
@@ -147,33 +165,6 @@ function openAvatarDetail(id)
     avatarUpdatedAt.textContent = avatar.updated_at;
 
     avatarModal.showModal();
-}
-
-function filterAvatarName()
-{
-    const keyword = filterNameText.value;
-    const result = filterAvatar(avatars, keyword);
-    render(result);
-}
-
-function filterAvatar(avatars, keyword)
-{
-    keyword = keyword.trim().toLowerCase();
-    if (!keyword)
-    {
-        return avatars;
-    }
-
-    return avatars.filter(a =>
-    {
-        // avatarNameのみ検索対象
-        return [
-            a.name
-        ]
-        .join(" ")
-        .toLowerCase()
-        .includes(keyword);
-    });
 }
 
 /* ChangeGridSize */
