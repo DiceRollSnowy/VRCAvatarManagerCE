@@ -90,6 +90,7 @@ input.sort {
     background: var(--color-grid-thumb-bg);
     border-radius: 8px;
     margin: 0 auto;
+    border-radius: 10px; 
 }
 
 .grid-thumbnail-img
@@ -97,6 +98,7 @@ input.sort {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px; 
 }
 
 .grid-avatarname
@@ -124,7 +126,7 @@ dialog::backdrop {
 
 .avatar-detail {
     width: 420px;
-    padding-bottom: 16px;
+    padding-bottom: 22px;
 }
 
 .avatar-detail-title {
@@ -139,8 +141,12 @@ dialog::backdrop {
     width: 240px;
     height: 180px;
     margin: 0 auto 0;
-    background: var(--color-grid-thumb-bg);
-    border-radius: 10px;
+}
+
+.avatar-detail-thumbnail-img {
+    width: 240px;
+    height: 180px;
+    border-radius: 10px; 
 }
 
 .avatar-detail-info
@@ -173,10 +179,9 @@ dialog::backdrop {
 
 .avatar-detail-buttons
 {
-    display:flex;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     justify-content:center;
-    flex-wrap:wrap;
-    grid-template-columns:1fr 1fr;
     gap:10px;
 }
 
