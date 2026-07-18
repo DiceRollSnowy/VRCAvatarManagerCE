@@ -2,7 +2,7 @@ const sampleAvatars =
 [
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee01",
-        name: "シフォン",
+        name: "1シフォン",
         description: "シフォン01",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -12,11 +12,11 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_01.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33"
+        updated_at: "2026-07-02 11:22:01"
     },
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee02",
-        name: "ルルリア",
+        name: "2ルルリア",
         description: "ルルリア02",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -26,11 +26,11 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_02.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33",
+        updated_at: "2026-07-02 11:22:02",
     },
         {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee03",
-        name: "ショコラ",
+        name: "3ショコラ",
         description: "ショコラ03",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -40,11 +40,11 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_03.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33",
+        updated_at: "2026-07-02 11:22:03",
     },
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee04",
-        name: "ぽわり",
+        name: "4ぽわり",
         description: "ぽわり04",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -54,11 +54,11 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_04.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33",
+        updated_at: "2026-07-02 11:22:04",
     },
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee05",
-        name: "萌",
+        name: "5萌",
         description: "萌05",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -68,11 +68,11 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_05.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33",
+        updated_at: "2026-07-02 11:22:05",
     },
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee06",
-        name: "ラスク",
+        name: "6ラスク",
         description: "ラスク06",
         unity: "2022.3.22f1",
         prank_pc: "6",
@@ -82,6 +82,6 @@ const sampleAvatars =
         thumbnail_url: "./thumb/avatar_sample_06.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
-        updated_at: "2026-07-02 11:22:33",
+        updated_at: "2026-07-02 11:22:06",
     }
 ];
