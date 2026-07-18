@@ -1,4 +1,4 @@
-const SampleAvatars = 
+const sampleAvatars = 
 [
     {
         id: "avtr_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeee01",
@@ -79,7 +79,7 @@ const SampleAvatars =
         prank_and: "1",
         prank_ios: "1",
         platform: "standalonewindows",
-        thumbnail_url: "./thumb/avatar_sample_05.jpg",
+        thumbnail_url: "./thumb/avatar_sample_06.jpg",
         upload_user_id: "usr_xxx",
         created_at: "2026-07-01 11:22:33",
         updated_at: "2026-07-02 11:22:33",

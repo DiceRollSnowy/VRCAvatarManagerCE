@@ -1,8 +1,5 @@
 /* data */
-//const data = [...Array(20)].map((_,i)=>({name:'Avatar '+(i+1)}));
-
-//const avatars = AvatarRepository.getAll();
-const avatars = SampleAvatars;
+const avatars = AvatarRepository.getAll();
 
 /* const */
 
