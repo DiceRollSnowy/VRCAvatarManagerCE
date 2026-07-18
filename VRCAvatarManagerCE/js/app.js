@@ -6,7 +6,7 @@ const avatars = SampleAvatars;
 
 /* const */
 
-const CARD_SIZE = {
+const GRID_SIZE = {
     Small: {
         gridWidth: 140,
         thumbHeight: 90
@@ -78,9 +78,9 @@ function render(list)
 {
     avatarGrid.innerHTML='';
     list.forEach(avatar=>{
-        const card = document.createElement('div');
-        card.className='grid';
-        card.innerHTML=
+        const grid = document.createElement('div');
+        grid.className='grid';
+        grid.innerHTML=
             `<div class='grid-thumbnail'>
                 <img id='gridAvatarThumbnail' class='grid-thumbnail-img'>
             </div>
@@ -88,27 +88,27 @@ function render(list)
             <button id='detailBtn' class='grid-detail'>詳細</button>
             <button id='changeBtn' class='grid-change'>変更</button>`;
 
-        const avatarThumbnail = card.querySelector('#gridAvatarThumbnail');
+        const avatarThumbnail = grid.querySelector('#gridAvatarThumbnail');
         avatarThumbnail.src = avatar.thumbnail_url;
         avatarThumbnail.alt = avatar.name;
-        const detailBtn = card.querySelector('#detailBtn');
+        const detailBtn = grid.querySelector('#detailBtn');
         detailBtn.onclick=()=>{
             showAvatarDetail(avatar);
         };
-        const changeBtn = card.querySelector('#changeBtn');
+        const changeBtn = grid.querySelector('#changeBtn');
         changeBtn.onclick=()=>{
             alert(avatar.name + "に 変更しますか？");
         }
 
-        avatarGrid.appendChild(card);
+        avatarGrid.appendChild(grid);
     });
 }
 
-function changeCardSize(cardWidth, thumbHeight)
+function changeGridSize(gridWidth, thumbHeight)
 {
     document.documentElement.style.setProperty(
         "--grid-width",
-        `${cardWidth}px`
+        `${gridWidth}px`
     );
 
     document.documentElement.style.setProperty(
@@ -145,24 +145,24 @@ function filterName()
     console.log(text);
 }
 
-/* ChangeCardSize */
+/* ChangeGridSize */
 
-sizeSmallBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Small.gridWidth, CARD_SIZE.Small.thumbHeight));
-sizeMediumBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Medium.gridWidth, CARD_SIZE.Medium.thumbHeight));
-sizeLargeBtn.addEventListener('click', () => changeCardSize(CARD_SIZE.Large.gridWidth, CARD_SIZE.Large.thumbHeight));
+sizeSmallBtn.addEventListener('click', () => changeGridSize(GRID_SIZE.Small.gridWidth, GRID_SIZE.Small.thumbHeight));
+sizeMediumBtn.addEventListener('click', () => changeGridSize(GRID_SIZE.Medium.gridWidth, GRID_SIZE.Medium.thumbHeight));
+sizeLargeBtn.addEventListener('click', () => changeGridSize(GRID_SIZE.Large.gridWidth, GRID_SIZE.Large.thumbHeight));
 
 sizeSmallBtn.onclick = () =>
 {
-    changeCardSize(CARD_SIZE.Small.gridWidth, CARD_SIZE.Small.thumbHeight);
+    changeGridSize(GRID_SIZE.Small.gridWidth, GRID_SIZE.Small.thumbHeight);
     setActive(sizeSmallBtn);
 };
 sizeMediumBtn.onclick = () =>
 {
-    changeCardSize(CARD_SIZE.Medium.gridWidth, CARD_SIZE.Medium.thumbHeight);
+    changeGridSize(GRID_SIZE.Medium.gridWidth, GRID_SIZE.Medium.thumbHeight);
     setActive(sizeMediumBtn);
 };
 sizeLargeBtn.onclick = () =>
 {
-    changeCardSize(CARD_SIZE.Large.gridWidth, CARD_SIZE.Large.thumbHeight);
+    changeGridSize(GRID_SIZE.Large.gridWidth, GRID_SIZE.Large.thumbHeight);
     setActive(sizeLargeBtn);
 };
