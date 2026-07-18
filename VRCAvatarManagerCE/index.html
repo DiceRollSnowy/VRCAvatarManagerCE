@@ -39,10 +39,33 @@
         <dialog id='avatarDetailModal'>
             <div class="avatar-detail">
                 <div class='avatar-detail-title'>
-                    <span class='avatar-detail-name'>Avatar Name</span>
+                    <span id="avatarName" class='avatar-detail-name'></span>
                 </div>
-                <div class='avatar-detail-thumbnail'></div>
-                <div class='avatar-detail-content'>
+                <div id='avatarThumbnail' class='avatar-detail-thumbnail'></div>
+
+                <div class='avatar-detail-info'>
+                    <div class="info-row">
+                        <span class="info-label">Description</span>
+                        <span id="avatarDescription" class="info-value">aaaaa</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Unity</span>
+                        <span id="avatarUnityVer" class="info-value">bbbbb</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Platform</span>
+                        <span id="avatarPlatform" class="info-value">ccccc</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Created</span>
+                        <span id="avatarCreatedAt" class="info-value">ddddd</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Updated</span>
+                        <span id="avatarUpdatedAt" class="info-value">eeeee</span>
+                    </div>
+                </div>
+                <div class='avatar-detail-buttons'>
                     <button id='changeAvatarBtn'>アバター変更</button>
                     <button id='copyBpidBtn'>BPID コピー</button>
                     <button id='openWebBtn'>VRC WebPage</button>

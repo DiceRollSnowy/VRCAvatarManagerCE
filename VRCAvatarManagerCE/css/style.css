@@ -119,23 +119,51 @@ dialog::backdrop {
     padding-bottom: 16px;
 }
 
-.avatar-detail-title{
+.avatar-detail-title {
     font-size:24px;
     font-weight:bold;
     text-align:center;
+    color:var(--color-text-sub);
     padding: 12px;
 }
 
-.avatar-detail-thumbnail
-{
+.avatar-detail-thumbnail {
     width: 240px;
     height: 180px;
-    margin: 0 auto 20px;
+    margin: 0 auto 0;
     background: var(--color-grid-thumb-bg);
     border-radius: 10px;
 }
 
-.avatar-detail-content
+.avatar-detail-info
+ {
+    display: flex;
+    flex-direction:column;
+    gap: 12px;
+    padding:16px;
+}
+
+.info-row
+{
+    display:flex;
+}
+
+.info-label {
+    flex:0 0 100px;
+    text-align: center;
+    color:var(--color-text-sub);
+    font-size:16px;
+    font-weight:600;
+}
+
+.info-value {
+    flex: 1;
+    text-align: left;
+    color:var(--color-text-sub);
+    font-size:16px;
+}
+
+.avatar-detail-buttons
 {
     display:flex;
     justify-content:center;
@@ -144,9 +172,10 @@ dialog::backdrop {
     gap:10px;
 }
 
-.avatar-detail-content button{
+.avatar-detail-buttons button {
     width:140px;
     height:42px;
+    font-weight:bold;
     border:none;
     border-radius:8px;
     cursor:pointer;
