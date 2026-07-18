@@ -32,6 +32,7 @@ const sizeButtons = [
 ];
 
 const filterNameBtn = document.getElementById('filterNameBtn');
+const filterNameText = document.getElementById('filterNameText');
 
 /* Element AvatarDetail */
 
@@ -54,20 +55,27 @@ initializeEvents();
 
 function initializeEvents()
 {
-    /* Init */
-    filterNameBtn.addEventListener('click', () => filterName());
-
-    /* Modal */
+    // Modal Event
     changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
     copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
     openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
     deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
     closeAvatarDetailBtn.onclick=()=>avatarModal.close();
 
+    // Filter Event
+    filterNameBtn.addEventListener('click', () => filterAvatarName());
+    filterNameText.addEventListener("keydown", (e) =>
+    {
+        if (e.key === "Enter")
+        {
+            filterAvatarName();
+        }
+    });
+
     // Display Cards
     render(avatars);
 
-    // Init 
+    // Size
     setActive(sizeMediumBtn);
 }
 
@@ -133,13 +141,31 @@ function showAvatarDetail(avatar)
     avatarModal.showModal();
 }
 
-function filterName()
+function filterAvatarName()
 {
-    var text = filterNameText.value?.trim() ?? "";
-    if (text === "") {
-        return;
+    const keyword = filterNameText.value;
+    const result = filterAvatar(avatars, keyword);
+    render(result);
+}
+
+function filterAvatar(avatars, keyword)
+{
+    keyword = keyword.trim().toLowerCase();
+    if (!keyword)
+    {
+        return avatars;
     }
-    console.log(text);
+
+    return avatars.filter(a =>
+    {
+        // avatarNameのみ検索対象
+        return [
+            a.name
+        ]
+        .join(" ")
+        .toLowerCase()
+        .includes(keyword);
+    });
 }
 
 /* ChangeGridSize */
