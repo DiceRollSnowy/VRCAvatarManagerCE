@@ -98,7 +98,7 @@ function render(list)
         avatarThumbnail.alt = avatar.name;
         const detailBtn = grid.querySelector('#detailBtn');
         detailBtn.onclick=()=>{
-            showAvatarDetail(avatar);
+            openAvatarDetail(avatar.id);
         };
         const changeBtn = grid.querySelector('#changeBtn');
         changeBtn.onclick=()=>{
@@ -128,8 +128,15 @@ function setActive(button)
     button.classList.add("active");
 }
 
-function showAvatarDetail(avatar)
+function openAvatarDetail(id)
 {
+    const avatar = AvatarRepository.getById(id);
+    if (!avatar)
+    {
+        console.error(`Avatar not found. AvatarId=${id}`);
+        return;
+    }
+
     avatarName.textContent = avatar.name;
     avatarDescription.textContent = avatar.description;
     avatarThumbnail.src = avatar.thumbnail_url;
@@ -138,6 +145,7 @@ function showAvatarDetail(avatar)
     avatarPlatform.textContent = avatar.platform;
     avatarCreatedAt.textContent = avatar.created_at;
     avatarUpdatedAt.textContent = avatar.updated_at;
+
     avatarModal.showModal();
 }
 
