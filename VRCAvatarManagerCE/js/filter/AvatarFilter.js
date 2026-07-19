@@ -1,3 +1,12 @@
+const SORT_TYPE = {
+    NAME_ASC: "nameAsc",
+    NAME_DESC: "nameDesc",
+    UPDATED_ASC: "updatedAsc",
+    UPDATED_DESC: "updatedDesc",
+    CREATED_ASC: "createdAsc",
+    CREATED_DESC: "createdDesc"
+}
+
 /* filter */
 
 function filterAvatarName()
@@ -7,7 +16,7 @@ function filterAvatarName()
     render(result);
 }
 
-function filterAvatar(avatars, keyword)
+export function filterAvatar(avatars, keyword)
 {
     keyword = keyword.trim().toLowerCase();
     if (!keyword)
@@ -29,7 +38,7 @@ function filterAvatar(avatars, keyword)
 
 /* Sort */
 
-function sortAvatars(avatars, sortType)
+export function sortAvatars(avatars, sortType)
 {
     const sorted = [...avatars]; // 元データは変更しない
 

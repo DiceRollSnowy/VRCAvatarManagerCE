@@ -1,3 +1,8 @@
+import {
+    filterAvatar,
+    sortAvatars
+} from "./filter/AvatarFilter.js";
+
 /* const */
 
 const GRID_SIZE = {
@@ -14,15 +19,6 @@ const GRID_SIZE = {
         thumbHeight: 240
     }
 };
-
-const SORT_TYPE = {
-    NAME_ASC: "nameAsc",
-    NAME_DESC: "nameDesc",
-    UPDATED_ASC: "updatedAsc",
-    UPDATED_DESC: "updatedDesc",
-    CREATED_ASC: "createdAsc",
-    CREATED_DESC: "createdDesc"
-}
 
 /* Element */
 
