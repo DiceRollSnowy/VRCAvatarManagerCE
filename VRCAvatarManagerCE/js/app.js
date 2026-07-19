@@ -3,6 +3,8 @@ import {
     sortAvatars
 } from "./filter/AvatarFilter.js";
 
+import { AvatarRepository } from "./repositories/AvatarRepository.js";
+
 /* const */
 
 const GRID_SIZE = {

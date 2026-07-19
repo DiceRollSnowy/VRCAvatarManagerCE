@@ -1,4 +1,4 @@
-class AvatarRepository
+export class AvatarRepository
 {
     static getAll() 
     {
