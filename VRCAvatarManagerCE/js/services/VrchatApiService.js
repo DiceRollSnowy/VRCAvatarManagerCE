@@ -21,9 +21,13 @@ export class VrchatApiService
             }
         );
 
-        if(!response.ok)
+        if(response.status === 401)
         {
-            throw new Error("VRChat login required");
+            throw new Error("NOT_LOGIN");
+        }
+        else if(!response.ok)
+        {
+            throw new Error(`VRChat API Error. Status: ${response.status}`);
         }
 
         const user = await response.json();

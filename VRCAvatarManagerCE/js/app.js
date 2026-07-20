@@ -135,10 +135,23 @@ function render(list)
 }
 
 // 同期処理
-function syncAvatars(isAll)
+async function syncAvatars(isAll)
 {
-    const user = VrchatApiService.getCurrentUser();
-
+    try
+    {
+        const user = await VrchatApiService.getCurrentUser();
+    }
+    catch (error)
+    {
+        if(error.message === "NOT_LOGIN")
+        {
+            showLoginRequired();
+        }
+        else
+        {
+            console.error(error);
+        }
+    }
 }
 
 function changeGridSize(gridWidth, thumbHeight)
