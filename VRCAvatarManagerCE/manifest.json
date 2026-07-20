@@ -5,6 +5,14 @@
     "action": {
         "default_title": "VRChat Avatar Manager"
     },
+    "permissions": [
+        "cookies",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://api.vrchat.cloud/*",
+        "https://vrchat.com/*"
+    ],
     "background": {
         "service_worker": "background.js"
     }

@@ -4,6 +4,7 @@ import {
 } from "./filter/AvatarFilter.js";
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
+import { VrchatApiService } from "./services/VrchatApiService.js";
 
 /* const */
 
@@ -34,6 +35,10 @@ const sizeButtons = [
     sizeMediumBtn,
     sizeLargeBtn
 ];
+
+// Sync Button
+const sync25Btn = document.getElementById('sync25Btn');
+const syncAllBtn = document.getElementById('syncAllBtn');
 
 const filterNameBtn = document.getElementById('filterNameBtn');
 const filterNameText = document.getElementById('filterNameText');
@@ -67,6 +72,10 @@ function initializeEvents()
     openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
     deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
     closeAvatarDetailBtn.onclick=()=>avatarModal.close();
+
+    // Sync Event
+    sync25Btn.addEventListener('click', () => syncAvatars(false));
+    syncAllBtn.addEventListener('click', () => syncAvatars(true));
 
     // Filter Event
     filterNameBtn.addEventListener('click', () => updateList());
@@ -123,6 +132,12 @@ function render(list)
 
         avatarGrid.appendChild(grid);
     });
+}
+
+// 同期処理
+function syncAvatars(isAll)
+{
+    
 }
 
 function changeGridSize(gridWidth, thumbHeight)
