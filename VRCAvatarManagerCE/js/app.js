@@ -137,7 +137,8 @@ function render(list)
 // 同期処理
 function syncAvatars(isAll)
 {
-    
+    const user = VrchatApiService.getCurrentUser();
+
 }
 
 function changeGridSize(gridWidth, thumbHeight)
