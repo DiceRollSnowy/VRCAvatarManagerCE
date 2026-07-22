@@ -29,6 +29,9 @@ const GRID_SIZE = {
 
 const avatarGrid = document.getElementById('avatarGrid');
 
+// Status
+const avatarCount = document.getElementById('avatarCount');
+
 const sizeSmallBtn = document.getElementById('sizeSmallBtn');
 const sizeMediumBtn = document.getElementById('sizeMediumBtn');
 const sizeLargeBtn = document.getElementById('sizeLargeBtn');
@@ -64,8 +67,6 @@ const dialogAvatarPlatform = document.getElementById("avatarPlatform");
 const dialogAvatarPerformanceRank = document.getElementById("avatarPerformanceRank");
 const dialogAvatarCreatedAt = document.getElementById("avatarCreatedAt");
 const dialogAvatarUpdatedAt = document.getElementById("avatarUpdatedAt");
-
-
 
 /* Initialize */
 
@@ -131,6 +132,8 @@ async function updateList()
         result = filterAvatar(result, filterNameText.value);
         result = sortAvatars(result, sortSelect.value);
         render(result);
+
+        displayAvatarCount(result.length);
     }
     catch (error)
     {
@@ -270,6 +273,17 @@ function changeGridSize(gridWidth, thumbHeight)
     );
 }
 
+//
+function displayAvatarCount(count)
+{
+    if (count < 0)
+    {
+        count = 0;
+    }
+    avatarCount.textContent = `${count} 件`
+}
+
+//
 function setActive(button)
 {
     sizeButtons.forEach(b => b.classList.remove("active"));
