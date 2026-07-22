@@ -4,6 +4,7 @@ import {
 } from "./filter/AvatarFilter.js";
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
+import { ImageLoader } from "./services/ImageLoader.js";
 
 /* const */
 
@@ -116,7 +117,7 @@ async function updateList()
     try
     {
         let result = await AvatarRepository.getAll();
-        console.log(result);
+        //console.log(result);
 
         result = filterAvatar(result, filterNameText.value);
         result = sortAvatars(result, sortSelect.value);
@@ -136,7 +137,7 @@ async function updateList()
     }
 }
 
-function render(list)
+async function render(list)
 {
     avatarGrid.innerHTML='';
     list.forEach(avatar=>{
@@ -144,20 +145,22 @@ function render(list)
         grid.className='grid';
         grid.innerHTML=
             `<div class='grid-thumbnail'>
-                <img id='gridAvatarThumbnail' class='grid-thumbnail-img'>
+                <img class='grid-thumbnail-img'>
             </div>
             <p class='grid-avatarname'>${avatar.name}</p>
-            <button id='detailBtn' class='grid-detail'>詳細</button>
-            <button id='changeBtn' class='grid-change'>変更</button>`;
+            <button class='grid-detail'>詳細</button>
+            <button class='grid-change'>変更</button>`;
 
-        const avatarThumbnail = grid.querySelector('#gridAvatarThumbnail');
-        avatarThumbnail.src = avatar.thumbnail_url;
+        const avatarThumbnail = grid.querySelector('.grid-thumbnail-img');
+        ImageLoader.enqueue(avatarThumbnail, avatar.thumbnail_url);
         avatarThumbnail.alt = avatar.name;
-        const detailBtn = grid.querySelector('#detailBtn');
+
+        const detailBtn = grid.querySelector('.grid-detail');
         detailBtn.onclick=()=>{
             openAvatarDetail(avatar.id);
         };
-        const changeBtn = grid.querySelector('#changeBtn');
+        
+        const changeBtn = grid.querySelector('.grid-change');
         changeBtn.onclick=()=>{
             alert(avatar.name + "に 変更しますか？");
         }
