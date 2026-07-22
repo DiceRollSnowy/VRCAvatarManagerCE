@@ -48,16 +48,23 @@ const sortSelect = document.getElementById('sortSelect');
 
 /* Element AvatarDetail */
 
-const avatarModal = document.getElementById('avatarDetailModal');
+const avatarDialog = document.getElementById('avatarDetailDialog');
+const changeAvatarBtn = document.getElementById('changeAvatarBtn');
+const copyAvatarIdBtn = document.getElementById('copyAvatarIdBtn');
+const openAvatarPageBtn = document.getElementById('openAvatarPageBtn');
+const deleteAvatarBtn = document.getElementById('deleteAvatarBtn');
+const closeAvatarDetailBtn = document.getElementById('closeAvatarDetailBtn');
 
-const avatarId = document.getElementById("avatarId");
-const avatarName = document.getElementById("avatarName");
-const avatarThumbnail = document.getElementById("avatarThumbnail");
-const avatarDescription = document.getElementById("avatarDescription");
-const avatarPlatform = document.getElementById("avatarPlatform");
-const avatarPerformanceRank = document.getElementById("avatarPerformanceRank");
-const avatarCreatedAt = document.getElementById("avatarCreatedAt");
-const avatarUpdatedAt = document.getElementById("avatarUpdatedAt");
+const dialogAvatarId = document.getElementById("avatarId");
+const dialogAvatarName = document.getElementById("avatarName");
+const dialogAvatarThumbnail = document.getElementById("avatarThumbnail");
+const dialogAvatarDescription = document.getElementById("avatarDescription");
+const dialogAvatarPlatform = document.getElementById("avatarPlatform");
+const dialogAvatarPerformanceRank = document.getElementById("avatarPerformanceRank");
+const dialogAvatarCreatedAt = document.getElementById("avatarCreatedAt");
+const dialogAvatarUpdatedAt = document.getElementById("avatarUpdatedAt");
+
+
 
 /* Initialize */
 
@@ -67,12 +74,12 @@ initializeEvents();
 
 async function initializeEvents()
 {
-    // Modal Event
-    changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
-    copyBpidBtn.onclick=()=>navigator.clipboard.writeText('avtr_dummy');
-    openWebBtn.onclick=()=>window.open('https://vrchat.com/home/avatars');
-    deleteAvatarBtn.onclick=()=>alert('{avatar_name}を削除しますか？');
-    closeAvatarDetailBtn.onclick=()=>avatarModal.close();
+    // Dialog Event
+    changeAvatarBtn.addEventListener('click', () => changeAvatar());
+    copyAvatarIdBtn.addEventListener('click', () => copyAvatarId());
+    openAvatarPageBtn.addEventListener('click', () => openAvatarWebPage());
+    deleteAvatarBtn.addEventListener('click', () => deleteAvatar());
+    closeAvatarDetailBtn.addEventListener('click', () => avatarDialog.close());
 
     // Sync Event
     sync25Btn.addEventListener('click', () => syncAvatars(false));
@@ -191,6 +198,42 @@ async function syncAvatars(isAll)
     }
 }
 
+// アバター変更
+function changeAvatar()
+{
+    const avatarId = avatarDialog.dataset.avatarId;
+    const avatarName = avatarDialog.dataset.avatarName;
+    alert("ChangeAvatar: " + avatarName);
+}
+
+// Clipboard
+function copyAvatarId()
+{
+    const avatarId = avatarDialog.dataset.avatarId;
+    const avatarName = avatarDialog.dataset.avatarName;
+    navigator.clipboard.writeText(avatarId);
+    alert("Clipboard: " + avatarId);
+    console.log(avatarName)
+}
+
+// アバターページを開く
+function openAvatarWebPage()
+{
+    const avatarId = avatarDialog.dataset.avatarId;
+    const avatarName = avatarDialog.dataset.avatarName;
+    console.log(avatarId);
+    let link = `https://vrchat.com/home/avatar/${avatarId}`;
+    window.open(link, "_blank");
+}
+
+// アバター削除
+function deleteAvatar()
+{
+    const avatarId = avatarDialog.dataset.avatarId;
+    const avatarName = avatarDialog.dataset.avatarName;
+    alert("DeleteAvatar: " + avatarName);
+}
+
 function changeGridSize(gridWidth, thumbHeight)
 {
     document.documentElement.style.setProperty(
@@ -219,27 +262,33 @@ function openAvatarDetail(id)
         return;
     }
 
-    const avatarThumbnail = avatarDetailModal.querySelector('#avatarThumbnail');
+    console.log(avatar);
+
+    // datasetに保存
+    avatarDialog.dataset.avatarId = avatar.id;
+    avatarDialog.dataset.avatarName = avatar.name;
+
+    const avatarThumbnail = avatarDialog.querySelector('#avatarThumbnail');
     ImageLoader.enqueue(avatarThumbnail, avatar.thumbnail_url);
     avatarThumbnail.alt = avatar.name;
 
-    avatarName.textContent = avatar.name;
-    avatarDescription.textContent = avatar.description;
-    avatarPlatform.textContent = "-";
-    //avatarPlatform.textContent = avatar.platform;
+    dialogAvatarName.textContent = avatar.name;
+    dialogAvatarDescription.textContent = avatar.description;
+    dialogAvatarPlatform.textContent = "-";
+    //dialogAvatarPlatform.textContent = avatar.platform;
 
     const prankPC = avatar.performance_rating_pc;
     const prankAndroid = avatar.performance_rating_android;
     const prankIOS = avatar.performance_rating_ios;
     const perfmanceRank = `${prankPC} / ${prankAndroid} / ${prankIOS}`
-    avatarPerformanceRank.textContent = perfmanceRank;
+    dialogAvatarPerformanceRank.textContent = perfmanceRank;
 
     const createdAt = Utils.formatDate(avatar.created_at);
     const updatedAt = Utils.formatDate(avatar.updated_at);
-    avatarCreatedAt.textContent = createdAt;
-    avatarUpdatedAt.textContent = updatedAt;
+    dialogAvatarCreatedAt.textContent = createdAt;
+    dialogAvatarUpdatedAt.textContent = updatedAt;
 
-    avatarModal.showModal();
+    avatarDialog.showModal();
 }
 
 /* ChangeGridSize */
