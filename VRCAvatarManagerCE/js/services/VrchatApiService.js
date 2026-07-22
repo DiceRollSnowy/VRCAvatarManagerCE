@@ -7,7 +7,7 @@ export class VrchatApiService
     static async getCurrentUser()
     {
         const authCookie = await this.getVRChatAuthCookie();
-        console.log("Cookie: " + authCookie.value);
+        //console.log("Cookie: " + authCookie.value);
 
         await this.setApiAuthCookie(authCookie.value);
 
@@ -28,7 +28,7 @@ export class VrchatApiService
         }
 
         const user = await response.json();
-        console.log(user);
+        //console.log(user);
         return user;
     }
 

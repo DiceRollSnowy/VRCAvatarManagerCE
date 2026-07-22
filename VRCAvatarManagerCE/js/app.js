@@ -4,9 +4,6 @@ import {
 } from "./filter/AvatarFilter.js";
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
-import { VrchatApiService } from "./services/VrchatApiService.js";
-import { AvatarMapper } from "./model/AvatarMapper.js";
-
 
 /* const */
 
@@ -66,7 +63,7 @@ initializeEvents();
 
 /* Fuction */
 
-function initializeEvents()
+async function initializeEvents()
 {
     // Modal Event
     changeAvatarBtn.onclick=()=>alert('{avatar_name}に変更しますか？');
@@ -92,18 +89,51 @@ function initializeEvents()
     sortSelect.addEventListener("change", () => updateList());
 
     // Display Cards
-    updateList()
+    try
+    {
+        await AvatarRepository.dataSync();
+        updateList();
+    }
+    catch (error)
+    {
+        if(error.message === "NOT_LOGIN")
+        {
+            console.error("VRChat Not Login");
+            //showLoginRequired();
+        }
+        else
+        {
+            console.error(error);
+        }
+    }
 
     // Size
     setActive(sizeMediumBtn);
 }
 
-function updateList()
+async function updateList()
 {
-    let result = AvatarRepository.getAll();
-    result = filterAvatar(result, filterNameText.value);
-    result = sortAvatars(result, sortSelect.value);
-    render(result);
+    try
+    {
+        let result = await AvatarRepository.getAll();
+        console.log(result);
+
+        result = filterAvatar(result, filterNameText.value);
+        result = sortAvatars(result, sortSelect.value);
+        render(result);
+    }
+    catch (error)
+    {
+        if(error.message === "NOT_LOGIN")
+        {
+            console.error("VRChat Not Login");
+            //showLoginRequired();
+        }
+        else
+        {
+            console.error(error);
+        }
+    }
 }
 
 function render(list)
@@ -141,35 +171,14 @@ async function syncAvatars(isAll)
 {
     try
     {
-        // Login User
-        const user = await VrchatApiService.getCurrentUser();
-        console.log("LoginUser:" + user.id + " " + user.displayName);
-
-        // Get Avatars
-        const vrcData = await VrchatApiService.getAvatars(user.id, 0, 2);
-        console.log(vrcData);
-
-        // Convert Data
-        const avatars = vrcData.map(
-            avatar=> {
-                return AvatarMapper.AvatarDatafromVRChat(avatar);
-            }
-        );
-        console.log(avatars);
-
-        // updateList ------
-        //let result = AvatarRepository.getAll();
-        //result = filterAvatar(result, filterNameText.value);
-        //result = sortAvatars(result, sortSelect.value);
-        //render(result);
-        //------
-
+        updateList();
     }
     catch (error)
     {
         if(error.message === "NOT_LOGIN")
         {
-            showLoginRequired();
+            console.error("VRChat Not Login");
+            //showLoginRequired();
         }
         else
         {
