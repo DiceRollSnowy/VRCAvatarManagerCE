@@ -5,6 +5,7 @@ import {
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
 import { ImageLoader } from "./services/ImageLoader.js";
+import { Utils } from "./util/Utils.js";
 
 /* const */
 
@@ -51,10 +52,10 @@ const avatarModal = document.getElementById('avatarDetailModal');
 
 const avatarId = document.getElementById("avatarId");
 const avatarName = document.getElementById("avatarName");
-const avatarDescription = document.getElementById("avatarDescription");
 const avatarThumbnail = document.getElementById("avatarThumbnail");
-const avatarUnityVer = document.getElementById("avatarUnityVer");
+const avatarDescription = document.getElementById("avatarDescription");
 const avatarPlatform = document.getElementById("avatarPlatform");
+const avatarPerformanceRank = document.getElementById("avatarPerformanceRank");
 const avatarCreatedAt = document.getElementById("avatarCreatedAt");
 const avatarUpdatedAt = document.getElementById("avatarUpdatedAt");
 
@@ -218,14 +219,25 @@ function openAvatarDetail(id)
         return;
     }
 
+    const avatarThumbnail = avatarDetailModal.querySelector('#avatarThumbnail');
+    ImageLoader.enqueue(avatarThumbnail, avatar.thumbnail_url);
+    avatarThumbnail.alt = avatar.name;
+
     avatarName.textContent = avatar.name;
     avatarDescription.textContent = avatar.description;
-    avatarThumbnail.src = avatar.thumbnail_url;
-    avatarThumbnail.alt = avatar.name;
-    avatarUnityVer.textContent = avatar.unity;
-    avatarPlatform.textContent = avatar.platform;
-    avatarCreatedAt.textContent = avatar.created_at;
-    avatarUpdatedAt.textContent = avatar.updated_at;
+    avatarPlatform.textContent = "-";
+    //avatarPlatform.textContent = avatar.platform;
+
+    const prankPC = avatar.performance_rating_pc;
+    const prankAndroid = avatar.performance_rating_android;
+    const prankIOS = avatar.performance_rating_ios;
+    const perfmanceRank = `${prankPC} / ${prankAndroid} / ${prankIOS}`
+    avatarPerformanceRank.textContent = perfmanceRank;
+
+    const createdAt = Utils.formatDate(avatar.created_at);
+    const updatedAt = Utils.formatDate(avatar.updated_at);
+    avatarCreatedAt.textContent = createdAt;
+    avatarUpdatedAt.textContent = updatedAt;
 
     avatarModal.showModal();
 }

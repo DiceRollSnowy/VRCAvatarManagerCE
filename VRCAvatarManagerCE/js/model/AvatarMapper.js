@@ -3,9 +3,9 @@ export class AvatarMapper
     static AvatarDatafromVRChat(data)
     {
         const performance = data.performance ?? [];
-        const performance_pc = performance.standalonewindows ?? "";
-        const performance_android = performance.android ?? "";
-        const performance_ios = performance.ios ?? "";
+        const performance_pc = performance.standalonewindows ?? "-";
+        const performance_android = performance.android ?? "-";
+        const performance_ios = performance.ios ?? "-";
 
         return new Avatar({
             upload_user_id:data.authorId,
