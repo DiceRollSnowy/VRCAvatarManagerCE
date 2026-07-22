@@ -1,10 +1,7 @@
 // VRCAPIのやり取り
 export class VrchatApiService 
 {
-    static async login()
-    {   
-
-    }
+    static API_BASE = "https://api.vrchat.cloud/api/1";
 
     // ログイン中ユーザ情報取得
     static async getCurrentUser()
@@ -68,14 +65,68 @@ export class VrchatApiService
             });
         });
     }
-    
-    static async getAvatars()
-    {
 
+    // AvatarData 全件取得
+    static async getAllAvatar(userId)
+    {
+        const avatars = [];
+        let offset = 0;
+        const limit = 50;
+
+        while(true)
+        {
+            const result = await this.getAvatars(userId, offset, limit);
+            avatars.push(...result);
+
+            // 50件未満なら終了
+            if(result.length < limit)
+            {
+                break;
+            }
+
+            offset += limit;
+
+            // API負荷対策
+            await this.sleep(1000);
+        }
+
+        return avatars;
+    }
+    
+    // AvatarData 指定件数取得(50件まで)
+    static async getAvatars(userId, offset = 0, n = 50)
+    {
+        const params = new URLSearchParams({
+            user:"me",
+            offset:offset,
+            n:n,
+            releaseStatus:"all",
+            sort: "updated",
+            order: "descending"
+        });
+
+        const url = `${this.API_BASE}/avatars?${params}`
+        //console.log(url);
+
+        const response = await fetch(url,
+            {
+                method:"GET",
+                credentials:"include"
+            }
+        );
+
+        if(!response.ok)
+        {
+            throw new Error(`Avatar Error ${response.status}`);
+        }
+
+        return await response.json();
     }
 
-    static async getAvatar(id)
+    static sleep(ms)
     {
-
+        return new Promise(
+            resolve=>setTimeout(resolve, ms)
+        );
     }
 }

@@ -6,7 +6,7 @@ const sampleAvatars =
         description: "シフォン01",
         unity: "2022.3.22f1",
         prank_pc: "6",
-        prank_and: "1",
+        prank_android: "1",
         prank_ios: "1",
         platform: "standalonewindows",
         thumbnail_url: "./thumb/avatar_sample_01.jpg",

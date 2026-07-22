@@ -5,6 +5,8 @@ import {
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
 import { VrchatApiService } from "./services/VrchatApiService.js";
+import { AvatarMapper } from "./model/AvatarMapper.js";
+
 
 /* const */
 
@@ -139,7 +141,29 @@ async function syncAvatars(isAll)
 {
     try
     {
+        // Login User
         const user = await VrchatApiService.getCurrentUser();
+        console.log("LoginUser:" + user.id + " " + user.displayName);
+
+        // Get Avatars
+        const vrcData = await VrchatApiService.getAvatars(user.id, 0, 2);
+        console.log(vrcData);
+
+        // Convert Data
+        const avatars = vrcData.map(
+            avatar=> {
+                return AvatarMapper.AvatarDatafromVRChat(avatar);
+            }
+        );
+        console.log(avatars);
+
+        // updateList ------
+        //let result = AvatarRepository.getAll();
+        //result = filterAvatar(result, filterNameText.value);
+        //result = sortAvatars(result, sortSelect.value);
+        //render(result);
+        //------
+
     }
     catch (error)
     {
