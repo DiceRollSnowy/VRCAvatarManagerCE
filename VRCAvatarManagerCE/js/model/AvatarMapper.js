@@ -1,5 +1,3 @@
-import { Utils } from "/js/util/Util.js";
-
 export class AvatarMapper  
 {
     static AvatarDatafromVRChat(data)
