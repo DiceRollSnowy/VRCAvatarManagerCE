@@ -4,6 +4,7 @@ import {
 } from "./filter/AvatarFilter.js";
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
+import { VrchatApiService } from "./services/VrchatApiService.js";
 import { ImageLoader } from "./services/ImageLoader.js";
 import { Utils } from "./util/Utils.js";
 
@@ -170,7 +171,7 @@ async function render(list)
         
         const changeBtn = grid.querySelector('.grid-change');
         changeBtn.onclick=()=>{
-            alert(avatar.name + "に 変更しますか？");
+            changeAvatarById(avatar.id, avatar.name);
         }
 
         avatarGrid.appendChild(grid);
@@ -199,11 +200,33 @@ async function syncAvatars(isAll)
 }
 
 // アバター変更
-function changeAvatar()
+async function changeAvatar()
 {
     const avatarId = avatarDialog.dataset.avatarId;
     const avatarName = avatarDialog.dataset.avatarName;
+    await changeAvatarById(avatarId, avatarName);
+}
+
+async function changeAvatarById(avatarId, avatarName)
+{
     alert("ChangeAvatar: " + avatarName);
+    try
+    {
+        await VrchatApiService.changeAvatar(avatarId);
+        alert("アバターを変更しました。");
+    }
+    catch(error)
+    {
+        if(error.message === "CHANGE_AVATAR_ERROR")
+        {
+            alert("アバター変更に失敗しました。");
+        }
+        else
+        {
+            console.error(error);
+        }
+    }
+
 }
 
 // Clipboard
@@ -221,7 +244,7 @@ function openAvatarWebPage()
 {
     const avatarId = avatarDialog.dataset.avatarId;
     const avatarName = avatarDialog.dataset.avatarName;
-    console.log(avatarId);
+    //console.log(avatarId);
     let link = `https://vrchat.com/home/avatar/${avatarId}`;
     window.open(link, "_blank");
 }

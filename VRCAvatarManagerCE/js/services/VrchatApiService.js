@@ -123,6 +123,24 @@ export class VrchatApiService
         return await response.json();
     }
 
+    //
+    static async changeAvatar(avatarId)
+    {
+        const response = await fetch(
+            `${this.API_BASE}/avatars/${avatarId}/select`,
+            {
+                method: "PUT",
+                credentials: "include",
+            }
+        );
+
+        if (!response.ok)
+        {
+            throw new Error("CHANGE_AVATAR_ERROR");
+        }
+        return await response.json();
+    }
+
     static sleep(ms)
     {
         return new Promise(
