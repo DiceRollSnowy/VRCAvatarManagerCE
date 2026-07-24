@@ -10,6 +10,7 @@
 
     --color-primary:#4b6cb7;
     --color-active:#4d8cff;
+    --color-warning:#d6724a;
     --color-danger:#d64a4a;
 
     --color-text:#eeeeee;
@@ -66,6 +67,11 @@ button {
 
 button.active {
     background: var(--color-active);
+    color: var(--color-primary-sub);
+}
+
+button.warning {
+    background: var(--color-warning);
     color: var(--color-primary-sub);
 }
 

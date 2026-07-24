@@ -1,0 +1,98 @@
+dialog {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-dialog-bg);
+    color: var(--color-text);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(2px);
+}
+
+dialog button {
+    font-size: 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* AvatarDetail */
+
+.avatar-detail {
+    width: 420px;
+    padding-bottom: 22px;
+}
+
+.avatar-detail-title {
+    font-size:24px;
+    font-weight:bold;
+    text-align:center;
+    color:var(--color-text-sub);
+    padding: 12px;
+}
+
+.avatar-detail-thumbnail {
+    width: 240px;
+    height: 180px;
+    margin: 0 auto 0;
+}
+
+.avatar-detail-thumbnail-img {
+    width: 240px;
+    height: 180px;
+    border-radius: 10px; 
+}
+
+.avatar-detail-info
+ {
+    display: flex;
+    flex-direction:column;
+    gap: 12px;
+    padding:16px;
+}
+
+.info-row
+{
+    display:flex;
+}
+
+.info-label {
+    flex:0 0 100px;
+    text-align: center;
+    color:var(--color-text-sub);
+    font-size:16px;
+    font-weight:600;
+}
+
+.info-value {
+    flex: 1;
+    text-align: left;
+    color:var(--color-text-sub);
+    font-size:16px;
+}
+
+.avatar-detail-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content:center;
+    gap:10px;
+}
+
+.avatar-detail-buttons button {
+    width:140px;
+    height:40px;
+}
+
+.avatar-detail-footer {
+    display:flex;
+    justify-content:center;
+    margin-top:24px;
+}
+
+.avatar-detail-close {
+    width:100px;
+    height:36px;
+}
