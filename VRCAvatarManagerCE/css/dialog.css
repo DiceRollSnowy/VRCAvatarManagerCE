@@ -96,3 +96,35 @@ dialog button {
     width:100px;
     height:36px;
 }
+
+/* Confirm Dialog */
+
+.confirm-dialog {
+    width: 320px;
+    padding: 20px;
+}
+
+.confirm-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    color: var(--color-text-sub);
+}
+
+.confirm-message {
+    font-size: 16px;
+    padding: 24px 20px;
+}
+
+.confirm-dialog-buttons
+{
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 18px;
+}
+
+.confirm-dialog button {
+    width: 120px;
+    height: 36px;
+}
