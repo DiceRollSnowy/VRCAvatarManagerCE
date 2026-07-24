@@ -8,6 +8,7 @@ import { VrchatApiService } from "./services/VrchatApiService.js";
 import { ImageLoader } from "./services/ImageLoader.js";
 import { Utils } from "./util/Utils.js";
 
+import { ConfirmDialog } from "./ui/ConfirmDialog.js";
 /* const */
 
 const GRID_SIZE = {
@@ -52,6 +53,7 @@ const sortSelect = document.getElementById('sortSelect');
 
 /* Element AvatarDetail */
 
+// AvatarDetail Dialog
 const avatarDialog = document.getElementById('avatarDetailDialog');
 const changeAvatarBtn = document.getElementById('changeAvatarBtn');
 const copyAvatarIdBtn = document.getElementById('copyAvatarIdBtn');
@@ -68,6 +70,12 @@ const dialogAvatarPerformanceRank = document.getElementById("avatarPerformanceRa
 const dialogAvatarCreatedAt = document.getElementById("avatarCreatedAt");
 const dialogAvatarUpdatedAt = document.getElementById("avatarUpdatedAt");
 
+// Confirm Dialog
+const confirmDialog = document.getElementById("confirmDialog");
+const confirmTitle = document.getElementById("confirmTitle");
+const confirmMessage = document.getElementById("confirmMessage");
+const confirmOkBtn = document.getElementById("confirmOkBtn");
+const confirmCancelBtn = document.getElementById("confirmCancelBtn");
 /* Initialize */
 
 initializeEvents();
@@ -76,7 +84,7 @@ initializeEvents();
 
 async function initializeEvents()
 {
-    // Dialog Event
+    // AvatarDetail Dialog Event
     changeAvatarBtn.addEventListener('click', () => changeAvatar());
     copyAvatarIdBtn.addEventListener('click', () => copyAvatarId());
     openAvatarPageBtn.addEventListener('click', () => openAvatarWebPage());
@@ -184,6 +192,16 @@ async function render(list)
 // 同期処理
 async function syncAvatars(isAll)
 {
+    const syncNum = isAll ? "全件" : "25件";
+
+    // Confirm
+    const title = "アバター同期";
+    const message = `アバターを ${syncNum} 同期しますか？`
+    const type = "normal";
+
+    const result = await ConfirmDialog.show(title, message, type);
+    if (!result) return;
+
     try
     {
         updateList();
@@ -212,7 +230,14 @@ async function changeAvatar()
 
 async function changeAvatarById(avatarId, avatarName)
 {
-    alert("ChangeAvatar: " + avatarName);
+    // Confirm
+    const title = "アバター変更";
+    const message = `アバターを ${avatarName}に 変更しますか？`;
+    const type = "normal";
+
+    const result = await ConfirmDialog.show(title, message, type);
+    if (!result) return;
+
     try
     {
         await VrchatApiService.changeAvatar(avatarId);
@@ -253,10 +278,19 @@ function openAvatarWebPage()
 }
 
 // アバター削除
-function deleteAvatar()
+async function deleteAvatar()
 {
     const avatarId = avatarDialog.dataset.avatarId;
     const avatarName = avatarDialog.dataset.avatarName;
+
+    // Confirm
+    const title = "アバター削除";
+    const message = `${avatarName} を削除しますか？`
+    const type = "danger";
+
+    const result = await ConfirmDialog.show(title, message, type);
+    if (!result) return;
+
     alert("DeleteAvatar: " + avatarName);
 }
 

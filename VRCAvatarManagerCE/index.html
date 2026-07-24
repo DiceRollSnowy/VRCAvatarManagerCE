@@ -91,11 +91,26 @@
             </div>
         </dialog>
 
+        <dialog id="confirmDialog">
+            <div class="confirm-dialog">
+                <div class='confirm-title'>
+                    <span id="confirmTitle"></span>
+                </div>
+                <p id="confirmMessage" class="confirm-message"></p>
+                <div class="confirm-dialog-buttons">
+                    <button id="confirmOkBtn" class="">OK</button>
+                    <button id="confirmCancelBtn" class="">Cancel</button>
+                </div>
+            </div>
+        </dialog>
+
         <script src='./js/SampleData.js'></script>
         <script src='./js/repositories/SettingRepository.js'></script>
         <script src='./js/services/IndexedDb.js'></script>
 
         <script type="module" src='./js/util/Utils.js'></script>
+
+        <script type="module" src='./js/ui/ConfirmDialog.js'></script>
 
         <script src='./js/model/Avatar.js'></script>
         <script type="module" src='./js/model/AvatarMapper.js'></script>
