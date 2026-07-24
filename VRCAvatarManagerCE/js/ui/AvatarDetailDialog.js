@@ -140,7 +140,8 @@ export class AvatarDetailDialog
         const result = await AvatarService.deleteAvatar(avatarId, avatarName);
         if (result.success)
         {
-            Toast.success(`"アバターの削除に成功しました: ${avatarName}"`);
+            Toast.warning("現在アバター削除機能は実装されていません"); // wip
+            //Toast.success(`"アバターの削除に成功しました: ${avatarName}"`);
             this.dialog.close();
         }
         else
