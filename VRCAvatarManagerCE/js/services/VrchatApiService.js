@@ -7,8 +7,12 @@ export class VrchatApiService
     static async getCurrentUser()
     {
         const authCookie = await this.getVRChatAuthCookie();
-        //console.log("Cookie: " + authCookie.value);
 
+        // 未ログイン
+        if (!authCookie)
+        {
+            throw new Error("NOT_LOGIN");
+        }
         await this.setApiAuthCookie(authCookie.value);
 
         const response  = await fetch(
@@ -115,6 +119,10 @@ export class VrchatApiService
             }
         );
 
+        if(response.status === 401)
+        {
+            throw new Error("NOT_LOGIN");
+        }
         if(!response.ok)
         {
             throw new Error(`Avatar Error ${response.status}`);

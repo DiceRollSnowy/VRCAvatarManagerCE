@@ -1,5 +1,6 @@
 import { ConfirmDialog } from "/js/ui/ConfirmDialog.js";
 import { VrchatApiService } from "/js/services/VrchatApiService.js";
+import { Toast } from "/js/ui/Toast.js";
 
 export class AvatarService 
 {
@@ -16,16 +17,18 @@ export class AvatarService
         try
         {
             await VrchatApiService.changeAvatar(avatarId);
-            alert("アバターを変更しました。");
+            //alert("アバターを変更しました。");
+            Toast.success("アバターの変更に成功しました");
         }
         catch(error)
         {
-            if(error.message === "CHANGE_AVATAR_ERROR")
+            if(error.message === "NOT_LOGIN")
             {
-                alert("アバター変更に失敗しました。");
+                Toast.warning("VRChatにログインされていません");
             }
             else
             {
+                Toast.error("アバターの変更に失敗しました");
                 console.error(error);
             }
         }
@@ -42,6 +45,24 @@ export class AvatarService
         const result = await ConfirmDialog.show(title, message, type);
         if (!result) return;
 
-        alert("DeleteAvatar: " + avatarName);
+        try
+        {
+            alert("DeleteAvatar: " + avatarName);
+            //await VrchatApiService.changeAvatar(avatarId);
+            //alert("アバターを変更しました。");
+            Toast.success("アバターの削除に成功しました");
+        }
+        catch(error)
+        {
+            if(error.message === "NOT_LOGIN")
+            {
+                Toast.warning("VRChatにログインされていません");
+            }
+            else
+            {
+                Toast.error("アバターの削除に失敗しました");
+                console.error(error);
+            }
+        }
     }
 }

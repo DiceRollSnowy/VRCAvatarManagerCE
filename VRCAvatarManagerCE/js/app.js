@@ -13,6 +13,7 @@ import { Utils } from "./util/Utils.js";
 
 import { ConfirmDialog } from "./ui/ConfirmDialog.js";
 import { AvatarDetailDialog } from "./ui/AvatarDetailDialog.js";
+import { Toast } from "./ui/Toast.js";
 
 /* const */
 
@@ -30,6 +31,8 @@ const GRID_SIZE = {
         thumbHeight: 240
     }
 };
+
+const VRC_LOGIN_PAGE = "https://vrchat.com/home/login";
 
 /* Element */
 
@@ -98,11 +101,13 @@ async function initializeEvents()
     {
         if(error.message === "NOT_LOGIN")
         {
-            console.error("VRChat Not Login");
+            Toast.warning("VRChatにログインされていません");
+            //console.error("VRChat Not Login");
             //showLoginRequired();
         }
         else
         {
+            Toast.error("アバターデータの取得に失敗しました");
             console.error(error);
         }
     }
@@ -121,20 +126,13 @@ async function updateList()
         result = filterAvatar(result, filterNameText.value);
         result = sortAvatars(result, sortSelect.value);
         render(result);
-
         displayAvatarCount(result.length);
+        //Toast.info("アバターデータを表示しました");
     }
     catch (error)
     {
-        if(error.message === "NOT_LOGIN")
-        {
-            console.error("VRChat Not Login");
-            //showLoginRequired();
-        }
-        else
-        {
-            console.error(error);
-        }
+        Toast.error("アバターの表示に失敗しました");
+        console.error(error);
     }
 }
 
@@ -185,17 +183,22 @@ async function syncAvatars(isAll)
 
     try
     {
+        Toast.success("アバターの同期を開始しました");
+
         updateList();
+        Toast.success("アバターの同期に成功しました");
     }
     catch (error)
     {
         if(error.message === "NOT_LOGIN")
         {
-            console.error("VRChat Not Login");
+            Toast.warning("VRChatにログインされていません");
+            //console.error("VRChat Not Login");
             //showLoginRequired();
         }
         else
         {
+            Toast.error("アバターの同期に失敗しました");
             console.error(error);
         }
     }

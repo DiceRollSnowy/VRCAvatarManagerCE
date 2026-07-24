@@ -92,7 +92,8 @@ export class AvatarDetailDialog
     {
         const avatarId = this.#avatar.id;
         navigator.clipboard.writeText(avatarId);
-        alert("コピーしました: " + avatarId);
+        console.log("clipboard copied: " + avatarId);
+        Toast.info("クリップボードにコピーしました。");
     }
     
     // アバターページを開く

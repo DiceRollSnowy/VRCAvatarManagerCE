@@ -15,7 +15,7 @@ export class AvatarRepository
             //console.log("LoginUser:" + user.id + " " + user.displayName);
     
             // Get Avatars
-            const vrcData = await VrchatApiService.getAvatars(user.id, 0, 25); // Debug
+            const vrcData = await VrchatApiService.getAvatars(user.id, 0, 3); // Debug
             //const vrcData = await VrchatApiService.getAllAvatar(user.id);
             //console.log(vrcData);
     
