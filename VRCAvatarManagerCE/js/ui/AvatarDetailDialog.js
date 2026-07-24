@@ -1,5 +1,6 @@
 import { ImageLoader } from "/js/services/ImageLoader.js";
 import { Utils } from "/js/util/Utils.js";
+import { AvatarService } from "/js/services/AvatarService.js";
 
 export class AvatarDetailDialog 
 {
@@ -91,7 +92,7 @@ export class AvatarDetailDialog
     {
         const avatarId = this.#avatar.id;
         navigator.clipboard.writeText(avatarId);
-        alert("コピーしました。: " + avatarId);
+        alert("コピーしました: " + avatarId);
     }
     
     // アバターページを開く
@@ -103,14 +104,18 @@ export class AvatarDetailDialog
     }
 
     // アバター変更
-    #changeAvatar()
+    async #changeAvatar()
     {
-
+        const avatarId = this.#avatar.id;
+        const avatarName = this.#avatar.name;
+        await AvatarService.changeAvatar(avatarId, avatarName);
     }
 
     // アバター削除
-    #deleteAvatar()
+    async #deleteAvatar()
     {
-
+        const avatarId = this.#avatar.id;
+        const avatarName = this.#avatar.name;
+        await AvatarService.deleteAvatar(avatarId, avatarName);
     }
 }

@@ -4,8 +4,11 @@ import {
 } from "./filter/AvatarFilter.js";
 
 import { AvatarRepository } from "./repositories/AvatarRepository.js";
+
 import { VrchatApiService } from "./services/VrchatApiService.js";
+import { AvatarService } from "/js/services/AvatarService.js";
 import { ImageLoader } from "./services/ImageLoader.js";
+
 import { Utils } from "./util/Utils.js";
 
 import { ConfirmDialog } from "./ui/ConfirmDialog.js";
@@ -160,7 +163,7 @@ async function render(list)
         
         const changeBtn = grid.querySelector('.grid-change');
         changeBtn.onclick=()=>{
-            changeAvatarById(avatar.id, avatar.name);
+            AvatarService.changeAvatar(avatar.id, avatar.name);
         }
 
         avatarGrid.appendChild(grid);
@@ -196,59 +199,6 @@ async function syncAvatars(isAll)
             console.error(error);
         }
     }
-}
-
-// アバター変更
-async function changeAvatar()
-{
-    const avatarId = avatarDialog.dataset.avatarId;
-    const avatarName = avatarDialog.dataset.avatarName;
-    await changeAvatarById(avatarId, avatarName);
-}
-
-async function changeAvatarById(avatarId, avatarName)
-{
-    // Confirm
-    const title = "アバター変更";
-    const message = `アバターを ${avatarName}に 変更しますか？`;
-    const type = "normal";
-
-    const result = await ConfirmDialog.show(title, message, type);
-    if (!result) return;
-
-    try
-    {
-        await VrchatApiService.changeAvatar(avatarId);
-        alert("アバターを変更しました。");
-    }
-    catch(error)
-    {
-        if(error.message === "CHANGE_AVATAR_ERROR")
-        {
-            alert("アバター変更に失敗しました。");
-        }
-        else
-        {
-            console.error(error);
-        }
-    }
-}
-
-// アバター削除
-async function deleteAvatar()
-{
-    const avatarId = avatarDialog.dataset.avatarId;
-    const avatarName = avatarDialog.dataset.avatarName;
-
-    // Confirm
-    const title = "アバター削除";
-    const message = `${avatarName} を削除しますか？`
-    const type = "danger";
-
-    const result = await ConfirmDialog.show(title, message, type);
-    if (!result) return;
-
-    alert("DeleteAvatar: " + avatarName);
 }
 
 function changeGridSize(gridWidth, thumbHeight)
