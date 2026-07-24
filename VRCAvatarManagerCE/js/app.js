@@ -9,6 +9,8 @@ import { ImageLoader } from "./services/ImageLoader.js";
 import { Utils } from "./util/Utils.js";
 
 import { ConfirmDialog } from "./ui/ConfirmDialog.js";
+import { AvatarDetailDialog } from "./ui/AvatarDetailDialog.js";
+
 /* const */
 
 const GRID_SIZE = {
@@ -51,24 +53,6 @@ const filterNameText = document.getElementById('filterNameText');
 
 const sortSelect = document.getElementById('sortSelect');
 
-/* Element AvatarDetail */
-
-// AvatarDetail Dialog
-const avatarDialog = document.getElementById('avatarDetailDialog');
-const changeAvatarBtn = document.getElementById('changeAvatarBtn');
-const copyAvatarIdBtn = document.getElementById('copyAvatarIdBtn');
-const openAvatarPageBtn = document.getElementById('openAvatarPageBtn');
-const deleteAvatarBtn = document.getElementById('deleteAvatarBtn');
-const closeAvatarDetailBtn = document.getElementById('closeAvatarDetailBtn');
-
-const dialogAvatarId = document.getElementById("avatarId");
-const dialogAvatarName = document.getElementById("avatarName");
-const dialogAvatarThumbnail = document.getElementById("avatarThumbnail");
-const dialogAvatarDescription = document.getElementById("avatarDescription");
-const dialogAvatarPlatform = document.getElementById("avatarPlatform");
-const dialogAvatarPerformanceRank = document.getElementById("avatarPerformanceRank");
-const dialogAvatarCreatedAt = document.getElementById("avatarCreatedAt");
-const dialogAvatarUpdatedAt = document.getElementById("avatarUpdatedAt");
 
 // Confirm Dialog
 const confirmDialog = document.getElementById("confirmDialog");
@@ -76,6 +60,7 @@ const confirmTitle = document.getElementById("confirmTitle");
 const confirmMessage = document.getElementById("confirmMessage");
 const confirmOkBtn = document.getElementById("confirmOkBtn");
 const confirmCancelBtn = document.getElementById("confirmCancelBtn");
+
 /* Initialize */
 
 initializeEvents();
@@ -84,13 +69,6 @@ initializeEvents();
 
 async function initializeEvents()
 {
-    // AvatarDetail Dialog Event
-    changeAvatarBtn.addEventListener('click', () => changeAvatar());
-    copyAvatarIdBtn.addEventListener('click', () => copyAvatarId());
-    openAvatarPageBtn.addEventListener('click', () => openAvatarWebPage());
-    deleteAvatarBtn.addEventListener('click', () => deleteAvatar());
-    closeAvatarDetailBtn.addEventListener('click', () => avatarDialog.close());
-
     // Sync Event
     sync25Btn.addEventListener('click', () => syncAvatars(false));
     syncAllBtn.addEventListener('click', () => syncAvatars(true));
@@ -177,7 +155,7 @@ async function render(list)
 
         const detailBtn = grid.querySelector('.grid-detail');
         detailBtn.onclick=()=>{
-            openAvatarDetail(avatar.id);
+            openAvatarDetail(avatar.id)
         };
         
         const changeBtn = grid.querySelector('.grid-change');
@@ -254,27 +232,6 @@ async function changeAvatarById(avatarId, avatarName)
             console.error(error);
         }
     }
-
-}
-
-// Clipboard
-function copyAvatarId()
-{
-    const avatarId = avatarDialog.dataset.avatarId;
-    const avatarName = avatarDialog.dataset.avatarName;
-    navigator.clipboard.writeText(avatarId);
-    alert("Clipboard: " + avatarId);
-    console.log(avatarName)
-}
-
-// アバターページを開く
-function openAvatarWebPage()
-{
-    const avatarId = avatarDialog.dataset.avatarId;
-    const avatarName = avatarDialog.dataset.avatarName;
-    //console.log(avatarId);
-    let link = `https://vrchat.com/home/avatar/${avatarId}`;
-    window.open(link, "_blank");
 }
 
 // アバター削除
@@ -324,6 +281,7 @@ function setActive(button)
     button.classList.add("active");
 }
 
+// アバター詳細ダイアログ
 function openAvatarDetail(id)
 {
     const avatar = AvatarRepository.getById(id);
@@ -332,34 +290,10 @@ function openAvatarDetail(id)
         console.error(`Avatar not found. AvatarId=${id}`);
         return;
     }
-
     console.log(avatar);
 
-    // datasetに保存
-    avatarDialog.dataset.avatarId = avatar.id;
-    avatarDialog.dataset.avatarName = avatar.name;
-
-    const avatarThumbnail = avatarDialog.querySelector('#avatarThumbnail');
-    ImageLoader.enqueue(avatarThumbnail, avatar.thumbnail_url);
-    avatarThumbnail.alt = avatar.name;
-
-    dialogAvatarName.textContent = avatar.name;
-    dialogAvatarDescription.textContent = avatar.description;
-    dialogAvatarPlatform.textContent = "-";
-    //dialogAvatarPlatform.textContent = avatar.platform;
-
-    const prankPC = avatar.performance_rating_pc;
-    const prankAndroid = avatar.performance_rating_android;
-    const prankIOS = avatar.performance_rating_ios;
-    const perfmanceRank = `${prankPC} / ${prankAndroid} / ${prankIOS}`
-    dialogAvatarPerformanceRank.textContent = perfmanceRank;
-
-    const createdAt = Utils.formatDate(avatar.created_at);
-    const updatedAt = Utils.formatDate(avatar.updated_at);
-    dialogAvatarCreatedAt.textContent = createdAt;
-    dialogAvatarUpdatedAt.textContent = updatedAt;
-
-    avatarDialog.showModal();
+    const dialog = AvatarDetailDialog.getInstance();
+    dialog.show(avatar);
 }
 
 /* ChangeGridSize */
