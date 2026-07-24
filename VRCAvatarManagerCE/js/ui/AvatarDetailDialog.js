@@ -1,6 +1,7 @@
 import { ImageLoader } from "/js/services/ImageLoader.js";
 import { Utils } from "/js/util/Utils.js";
 import { AvatarService } from "/js/services/AvatarService.js";
+import { Toast } from "/js/ui/Toast.js";
 
 export class AvatarDetailDialog 
 {
