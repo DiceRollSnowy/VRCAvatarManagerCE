@@ -240,7 +240,7 @@ async function changeAvatarGrid(avatarId, avatarName)
     const result = await AvatarService.changeAvatar(avatarId, avatarName);
     if (result.success)
     {
-        Toast.success(`"アバターの変更に成功しました: ${avatarName}"`);
+        Toast.success(`アバターの変更に成功しました: ${avatarName}`);
     }
     else
     {
