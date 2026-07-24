@@ -18,18 +18,28 @@ export class AvatarService
         {
             await VrchatApiService.changeAvatar(avatarId);
             //alert("アバターを変更しました。");
-            Toast.success("アバターの変更に成功しました");
+
+            return { 
+                success: true,
+                message: ""
+            };
         }
         catch(error)
         {
             if(error.message === "NOT_LOGIN")
             {
-                Toast.warning("VRChatにログインされていません");
+                return { 
+                    success: false,
+                    message: "NOT_LOGIN"
+                };
             }
             else
             {
-                Toast.error("アバターの変更に失敗しました");
                 console.error(error);
+                return { 
+                    success: false,
+                    message: error.message
+                };
             }
         }
     }
@@ -47,21 +57,30 @@ export class AvatarService
 
         try
         {
-            alert("DeleteAvatar: " + avatarName);
-            //await VrchatApiService.changeAvatar(avatarId);
-            //alert("アバターを変更しました。");
-            Toast.success("アバターの削除に成功しました");
+            //await VrchatApiService.deleteAvatar(avatarId);
+            //alert("DeleteAvatar: " + avatarName);
+
+            return { 
+                success: true,
+                message: ""
+            };
         }
         catch(error)
         {
             if(error.message === "NOT_LOGIN")
             {
-                Toast.warning("VRChatにログインされていません");
+                return { 
+                    success: false,
+                    message: "NOT_LOGIN"
+                };
             }
             else
             {
-                Toast.error("アバターの削除に失敗しました");
                 console.error(error);
+                return { 
+                    success: false,
+                    message: error.message
+                };
             }
         }
     }

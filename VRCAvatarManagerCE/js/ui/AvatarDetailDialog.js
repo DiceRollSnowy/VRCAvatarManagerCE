@@ -110,7 +110,25 @@ export class AvatarDetailDialog
     {
         const avatarId = this.#avatar.id;
         const avatarName = this.#avatar.name;
-        await AvatarService.changeAvatar(avatarId, avatarName);
+     
+        const result = await AvatarService.changeAvatar(avatarId, avatarName);
+        if (result.success)
+        {
+            Toast.success(`"アバターの変更に成功しました: ${avatarName}"`);
+            this.dialog.close();
+        }
+        else
+        {
+            const message = result.message;
+            if(message === "NOT_LOGIN")
+            {
+                Toast.warning("VRChatにログインされていません");
+            }
+            else
+            {
+                Toast.error("アバターの変更に失敗しました");
+            }
+        }
     }
 
     // アバター削除
@@ -118,6 +136,24 @@ export class AvatarDetailDialog
     {
         const avatarId = this.#avatar.id;
         const avatarName = this.#avatar.name;
-        await AvatarService.deleteAvatar(avatarId, avatarName);
+
+        const result = await AvatarService.deleteAvatar(avatarId, avatarName);
+        if (result.success)
+        {
+            Toast.success(`"アバターの削除に成功しました: ${avatarName}"`);
+            this.dialog.close();
+        }
+        else
+        {
+            const message = result.message;
+            if(message === "NOT_LOGIN")
+            {
+                Toast.warning("VRChatにログインされていません");
+            }
+            else
+            {
+                Toast.error("アバターの削除に失敗しました");
+            }
+        }
     }
 }

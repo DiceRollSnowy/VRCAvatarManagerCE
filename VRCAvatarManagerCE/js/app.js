@@ -161,7 +161,7 @@ async function render(list)
         
         const changeBtn = grid.querySelector('.grid-change');
         changeBtn.onclick=()=>{
-            AvatarService.changeAvatar(avatar.id, avatar.name);
+            changeAvatarGrid(avatar.id, avatar.name);
         }
 
         avatarGrid.appendChild(grid);
@@ -232,6 +232,28 @@ function setActive(button)
 {
     sizeButtons.forEach(b => b.classList.remove("active"));
     button.classList.add("active");
+}
+
+//
+async function changeAvatarGrid(avatarId, avatarName)
+{
+    const result = await AvatarService.changeAvatar(avatarId, avatarName);
+    if (result.success)
+    {
+        Toast.success(`"アバターの変更に成功しました: ${avatarName}"`);
+    }
+    else
+    {
+        const message = result.message;
+        if(message === "NOT_LOGIN")
+        {
+            Toast.warning("VRChatにログインされていません");
+        }
+        else
+        {
+            Toast.error("アバターの変更に失敗しました");
+        }
+    }
 }
 
 // アバター詳細ダイアログ
