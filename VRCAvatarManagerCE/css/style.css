@@ -27,8 +27,7 @@ header {
     font-weight: bold;
 }
 
-.status
-{
+.status {
     font-size: 16px;
     color: var(--color-text-sub);
 }
@@ -83,8 +82,7 @@ input.sort {
     padding: 10px
 }
 
-.grid-thumbnail
-{
+.grid-thumbnail {
     width:100%;
     aspect-ratio:4 / 3;
     height: var(--thumb-height);
@@ -95,16 +93,14 @@ input.sort {
     border-radius: 10px; 
 }
 
-.grid-thumbnail-img
-{
+.grid-thumbnail-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 10px; 
 }
 
-.grid-avatarname
-{
+.grid-avatarname {
     font-size: 16px;
     font-weight: bold;
     margin: 10px auto;
@@ -159,6 +155,3 @@ input.sort {
 .toast.error {
     background: #d32f2f;
 }
-
-
-

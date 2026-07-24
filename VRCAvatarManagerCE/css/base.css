@@ -1,4 +1,4 @@
-:root{
+:root {
 
     /* Colors */
     --color-bg:#202124;
@@ -46,16 +46,14 @@
 
 button,
 input,
-select
-{
+select {
     font-size: 14px;
     height: 32px;
     padding: 6px 12px;
     border-radius: 8px;
 }
 
-button
-{
+button {
     border: none;
     text-align:center;
 }
@@ -89,8 +87,7 @@ select {
 }
 
 input:hover,
-select:hover
-{
+select:hover {
     border-color: var(--color-border-hover);
 }
 

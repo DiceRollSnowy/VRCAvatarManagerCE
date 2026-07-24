@@ -46,16 +46,14 @@ dialog button {
     border-radius: 10px; 
 }
 
-.avatar-detail-info
- {
+.avatar-detail-info {
     display: flex;
     flex-direction:column;
     gap: 12px;
     padding:16px;
 }
 
-.info-row
-{
+.info-row {
     display:flex;
 }
 

@@ -1,4 +1,5 @@
-const SORT_TYPE = {
+const SORT_TYPE = 
+{
     NAME_ASC: "nameAsc",
     NAME_DESC: "nameDesc",
     UPDATED_ASC: "updatedAsc",

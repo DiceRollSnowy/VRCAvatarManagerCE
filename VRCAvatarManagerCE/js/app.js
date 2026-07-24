@@ -17,7 +17,8 @@ import { Toast } from "./ui/Toast.js";
 
 /* const */
 
-const GRID_SIZE = {
+const GRID_SIZE =
+{
     Small: {
         gridWidth: 140,
         thumbHeight: 90
@@ -44,7 +45,8 @@ const avatarCount = document.getElementById('avatarCount');
 const sizeSmallBtn = document.getElementById('sizeSmallBtn');
 const sizeMediumBtn = document.getElementById('sizeMediumBtn');
 const sizeLargeBtn = document.getElementById('sizeLargeBtn');
-const sizeButtons = [
+const sizeButtons = 
+[
     sizeSmallBtn,
     sizeMediumBtn,
     sizeLargeBtn
