@@ -245,7 +245,11 @@ async function changeAvatarGrid(avatarId, avatarName)
     else
     {
         const message = result.message;
-        if(message === "NOT_LOGIN")
+        if(message === "CANCEL")
+        {
+            //
+        }
+        else if(message === "NOT_LOGIN")
         {
             Toast.warning("VRChatにログインされていません");
         }

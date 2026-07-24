@@ -12,7 +12,13 @@ export class AvatarService
         const type = "normal";
 
         const result = await ConfirmDialog.show(title, message, type);
-        if (!result) return;
+        if (!result) 
+        {
+            return { 
+                success: false,
+                message: "CANCEL"
+            }; 
+        }
 
         try
         {
@@ -53,7 +59,13 @@ export class AvatarService
         const type = "danger";
 
         const result = await ConfirmDialog.show(title, message, type);
-        if (!result) return;
+        if (!result) 
+        {
+            return { 
+                success: false,
+                message: "CANCEL"
+            }; 
+        }
 
         try
         {
